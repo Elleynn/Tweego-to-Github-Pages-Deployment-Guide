@@ -15,7 +15,7 @@ jobs:
         uses: actions/setup-go@v4.1.0
         with:
           go-version: 1.13.x
-          cache-dependency-path: "**/go.sum"
+          cache: false
 
       - name: build game
         run: |
@@ -29,5 +29,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-         # publish_branch: gh-pages
+          publish_branch: gh-pages
           publish_dir: ./${{vars.OUTPUT_DIRECTORY}}/
