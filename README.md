@@ -1,4 +1,4 @@
-# Tweego / VS Code / GitHib Actions Practice Repository
+Tweego / VS Code / GitHib Actions Practice Repository
 
 https://elleynn.github.io/TwinePractice/
 
@@ -12,7 +12,8 @@ Copying as a template
         Going to Settings -> Secrets and variables -> Actions and creating these repository variables:
             OUTPUT_DIRECTORY with the value of dist.
             OUTPUT_FILENAME with the value of index.html.
-        Going to Settings -> Pages -> Build and deployment and changing the branch to pages or whatever your publish_branch is in your workflow action peaceiris/actions-gh-pages@v3 section.
+        Going to Settings -> Pages -> Build and deployment and changing the branch to pages or 
+        whatever your publish_branch is in your workflow action peaceiris/actions-gh-pages@v3 section.
 
 Testing changes locally
 You can use mkdir -p ./dist && tweego -o ./dist/index.html ./[Insert Primary .twee Filename] then open the index.html file to view your changes.
