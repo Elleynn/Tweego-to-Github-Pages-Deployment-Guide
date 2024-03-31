@@ -20,7 +20,7 @@ jobs:
         run: |
           go clean -cache
           go clean -modcache
-          go install github.com/elleynn/tweego@latest
+          go get github.com/tmedwards
           export PATH=$PATH:$(go env GOPATH)/bin
           mkdir -p ${{vars.OUTPUT_DIRECTORY}} 
           touch ${{vars.OUTPUT_DIRECTORY}}/${{vars.OUTPUT_FILENAME}}
