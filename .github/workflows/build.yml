@@ -14,14 +14,13 @@ jobs:
       - name: Use Go
         uses: actions/setup-go@v4
         with:
-          go-version: '1.16'
+          go-version: '1.13'
           
       - name: build game
         run: |
-          go get github.com/tmedwards/tweego
+          go build github.com/tmedwards/tweego
           export PATH=$PATH:$(go env GOPATH)/bin
-          mkdir -p ${{vars.OUTPUT_DIRECTORY}} 
-          touch ${{vars.OUTPUT_DIRECTORY}}/${{vars.OUTPUT_FILENAME}}
+          mkdir -p ${{vars.OUTPUT_DIRECTORY}} && touch ${{vars.OUTPUT_DIRECTORY}}/${{vars.OUTPUT_FILENAME}}
           tweego ./src -o ${{vars.OUTPUT_DIRECTORY}}/${{vars.OUTPUT_FILENAME}}
 
       - name: Deploy to Pages
