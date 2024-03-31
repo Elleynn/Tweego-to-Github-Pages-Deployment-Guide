@@ -14,11 +14,13 @@ jobs:
       - name: Use Go
         uses: actions/setup-go@v5
         with:
-          go-version: '1.13.*'
+          go-version: '1.17.*'
 
       - name: build game
         run: |
+          go install github.com/psampaz/go-mod-outdated@latest
           go install https://github.com/tmedwards/tweego
+          go list -u -m -json all | go-mod-outdated
           export PATH=$PATH:$(go env GOPATH)/bin
           mkdir -p ${{vars.OUTPUT_DIRECTORY}} 
           touch ${{vars.OUTPUT_DIRECTORY}}/${{vars.OUTPUT_FILENAME}}
