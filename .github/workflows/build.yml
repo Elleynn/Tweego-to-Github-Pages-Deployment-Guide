@@ -23,7 +23,7 @@ jobs:
           export PATH=$PATH:$(go env GOPATH)/bin
           mkdir -p ${{vars.OUTPUT_DIRECTORY}} 
           touch ${{vars.OUTPUT_DIRECTORY}}/${{vars.OUTPUT_FILENAME}}
-          tweego ./passages -o ${{vars.OUTPUT_DIRECTORY}}/${{vars.OUTPUT_FILENAME}}
+          tweego ./src -o ${{vars.OUTPUT_DIRECTORY}}/${{vars.OUTPUT_FILENAME}}
 
       - name: Deploy to Pages
         uses: peaceiris/actions-gh-pages@v3
