@@ -18,7 +18,7 @@ jobs:
 
       - name: build game
         run: |
-          go install github.com/tmedwards/tweego@V2
+          go install github.com/tmedwards/tweego@v2
           export PATH=$PATH:$(go env GOPATH)/bin
           mkdir -p ${{vars.OUTPUT_DIRECTORY}} 
           touch ${{vars.OUTPUT_DIRECTORY}}/${{vars.OUTPUT_FILENAME}}
