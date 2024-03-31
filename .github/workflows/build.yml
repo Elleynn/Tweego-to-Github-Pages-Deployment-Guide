@@ -18,9 +18,7 @@ jobs:
 
       - name: build game
         run: |
-          go install github.com/psampaz/go-mod-outdated@latest
-          go install https://github.com/tmedwards/tweego
-          go list -u -m -json all | go-mod-outdated
+          go install https://github.com/tmedwards/tweego@v2.*
           export PATH=$PATH:$(go env GOPATH)/bin
           mkdir -p ${{vars.OUTPUT_DIRECTORY}} 
           touch ${{vars.OUTPUT_DIRECTORY}}/${{vars.OUTPUT_FILENAME}}
