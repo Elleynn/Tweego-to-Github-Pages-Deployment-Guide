@@ -1,9 +1,12 @@
 Tweego / VS Code / GitHib Actions Practice Repository
 
-https://elleynn.github.io/TwinePractice/
+[https://elleynn.github.io/TwinePractice/](https://elleynn.github.io/TwinePractice/)
 
-This repo demonstrates the Modern Developer's Workflow by Em Lazer-Walker. It also demonstrates compiling multiple files in the passages directory.
-Copying as a template
+From 6note's [TweeExample repository](https://github.com/6notes/tweeExample):
+
+This repo demonstrates the Modern Developer's Workflow by Em Lazer-Walker. It also demonstrates compiling multiple files in the src directory.
+
+# Copying as a template
 
     When copying as a template, these steps need to be done:
         Going to Settings -> Actions -> General -> Workflow permissions and:
@@ -14,6 +17,8 @@ Copying as a template
             OUTPUT_FILENAME with the value of index.html.
         Going to Settings -> Pages -> Build and deployment and changing the branch to pages or 
         whatever your publish_branch is in your workflow action peaceiris/actions-gh-pages@v3 section.
+        
+# Testing changes locally
 
-Testing changes locally
-You can use mkdir -p ./dist && tweego -o ./dist/index.html ./[Insert Primary .twee Filename] then open the index.html file to view your changes.
+You can use `mkdir -p ./dist && tweego -o ./dist/index.html ./src` then
+open the `index.html` file to view your changes.
