@@ -1,2 +1,6 @@
 :: Third Passage
-This is the third passage.
+
+This is the third passage. This passage is hosted in a separate file called "thirdPassage.twee".
+
+[[This is a link to the starting passage.|Start]]
+[[This is a link to the second passage.|Second Passage]]

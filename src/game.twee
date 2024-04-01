@@ -8,7 +8,7 @@
 }
 
 :: StoryTitle
-Twine Practice
+SugarCube 2: Twine Practice
 
 :: StoryMenu
 [[Statistics]]
@@ -17,17 +17,25 @@ Twine Practice
 :: Statistics
 !!Game Statistics
 
+Here you might compile your current player statistics.
+
 :: Codex
 !!Game Codex
 
+Here you might introduce lore about the game you are building.
+
 :: Start
-This is the first passage.
+
+This is the first passage to this game. This passage is titled "Start" as it is a special keyword in the SugarCube notation.
 
 [[This is a link to the second passage.|Second Passage]]
+[[This is a link to the third passage.|Third Passage]]
 
 :: Second Passage
-This is the second passage.
 
+This is the second passage. This second passage exists in the same file as the "Start" passage.
+
+[[This is a link to the starting passage.|Start]]
 [[This is a link to the third passage.|Third Passage]]
 
 
