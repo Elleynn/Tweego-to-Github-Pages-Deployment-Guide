@@ -8,28 +8,38 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      OUTPUT_DIRECTORY: dist
-      OUTPUT_FILENAME: index.html
     steps:
       - uses: actions/checkout@v2
 
-      - name: Use Go
-        uses: actions/setup-go@v4
-        with:
-          go-version: '1.17'
-          
-      - name: build game
+      - name: Install jq (JSON Processor)
+        run: sudo apt-get install jq
+
+      - name: Fetch Latest Tweego Release
+        id: tweego
         run: |
-          go env -w GO111MODULE=off
-          go get github.com/tmedwards/tweego
-          export PATH=$PATH:$(go env GOPATH)/bin
+          LATEST_RELEASE=$(curl -s -H "Authorization: token ${{ secrets.API_TOKEN }}" https://api.github.com/repos/tmedwards/tweego/releases/latest)
+          LATEST_TAG=$(echo $LATEST_RELEASE | jq -r .tag_name)
+          ASSET_URL=$(echo $LATEST_RELEASE | jq -r '.assets[] | select(.name | contains("linux-x64.zip")) | .browser_download_url')
+          echo "Downloading Tweego $LATEST_TAG"
+          curl -L -o tweego.zip $ASSET_URL
+          echo "::set-output name=tweego_path::$(pwd)/tweego"
+
+
+      - name: Prepare Environment
+        run: |
+          unzip tweego.zip -d tweego
+          chmod +x tweego/tweego
+          echo "TWEEGO_PATH=$(pwd)/tweego" >> $GITHUB_ENV
+
+      - name: Build Game
+        run: |
+          export PATH=$PATH:$TWEEGO_PATH
           mkdir -p $OUTPUT_DIRECTORY && touch $OUTPUT_DIRECTORY/$OUTPUT_FILENAME
-          tweego ./src -o $OUTPUT_DIRECTORY/$OUTPUT_FILENAME
+          tweego/tweego ./src -o $OUTPUT_DIRECTORY/$OUTPUT_FILENAME
 
       - name: Deploy to Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.API_TOKEN }}
           publish_branch: pages
           publish_dir: ./$OUTPUT_DIRECTORY
