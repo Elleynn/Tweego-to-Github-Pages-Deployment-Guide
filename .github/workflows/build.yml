@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Check out the repository code
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       # Install jq for JSON processing
       - name: Install jq
@@ -47,8 +47,10 @@ jobs:
 
       # Deploy the game to GitHub Pages
       - name: Deploy to Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.API_TOKEN }}
+          github_token: ${{ secrets.PERSONAL_TOKEN }}
           publish_branch: pages # The branch to which the compiled game will be pushed
           publish_dir: ./${{vars.OUTPUT_DIRECTORY}}/ # The directory where the compiled game is located
+          enable_jekyll: true # Bypass Jekyll with an empty file
+          cname: www.twinepractice.elleynn.com # Configure CNAME record for custome domain
