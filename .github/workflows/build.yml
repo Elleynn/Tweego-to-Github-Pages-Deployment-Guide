@@ -20,7 +20,7 @@ jobs:
       - name: Fetch Latest Tweego Release
         run: |
           #### Use the GitHub API to fetch the latest release data for Tweego
-          LATEST_RELEASE=$(curl -s -H "Authorization: token ${{ secrets.API_TOKEN }}" https://api.github.com/repos/tmedwards/tweego/releases/latest)
+          LATEST_RELEASE=$(curl -s -H "Authorization: token ${{ secrets.PERSONAL_TOKEN }}" https://api.github.com/repos/tmedwards/tweego/releases/latest)
           #### Parse the tag name and asset URL from the release data
           LATEST_TAG=$(echo $LATEST_RELEASE | jq -r .tag_name)
           ASSET_URL=$(echo $LATEST_RELEASE | jq -r '.assets[] | select(.name | contains("linux-x64.zip")) | .browser_download_url')
