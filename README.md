@@ -1,24 +1,61 @@
-Tweego / VS Code / GitHib Actions Practice Repository
+## Tweego / VS Code / GitHub Actions Practice Repository
 
-[https://elleynn.github.io/TwinePractice/](https://elleynn.github.io/TwinePractice/)
+This repo demonstrates compiling multiple Twine files in the `src` directory of the `main` branch and deploying the HTML file to a custom domain (or a GitHub Page) via a GitHub Actions workflow.
 
-From 6note's [TweeExample repository](https://github.com/6notes/tweeExample):
+Using GitHub Actions for compiling Twine games offers several benefits: it ensures a consistent and clean build environment, automates the compilation process for efficiency, facilitates seamless collaboration by handling merging and build processes, keeps the repository tidy by excluding compiled files, enables immediate detection of integration issues, and allows for secure handling of sensitive information through secrets. This automated workflow is scalable, supports continuous integration and delivery, and is adaptable to the growing complexity of game development.
 
-This repo demonstrates the Modern Developer's Workflow by Em Lazer-Walker. It also demonstrates compiling multiple files in the src directory.
+A large part of this project takes inspiration from Em Lazer-Walker's ['A Modern Developer's Workflow For Twine'](https://dev.to/lazerwalker/a-modern-developer-s-workflow-for-twine-4imp) and 6note's [TweeExample repository](https://github.com/6notes/tweeExample). Certain portions of these examples have depreciated since their publication, so I have created an alternative workflow that does not use the Go Environment since Tweego does not currently support Go modules. Instead, this workflow uses [jq for JSON processing](https://jqlang.github.io/jq/manual/) and the GitHub API to grab the latest precompiled version of Tweego.
 
-# Copying as a template
+## Workflow Setup
 
-    When copying as a template, these steps need to be done:
-        Going to Settings -> Actions -> General -> Workflow permissions and:
-            turning on 'Allow GitHub Actions to create and approve pull requests'
-            selecting the 'Read and write permissions' option
-        Going to Settings -> Secrets and variables -> Actions and creating these repository variables:
-            OUTPUT_DIRECTORY with the value of dist.
-            OUTPUT_FILENAME with the value of index.html.
-        Going to Settings -> Pages -> Build and deployment and changing the branch to pages or 
-        whatever your publish_branch is in your workflow action peaceiris/actions-gh-pages@v3 section.
-        
-# Testing changes locally
+### Step 1: Configure Workflow Permissions
 
-You can use `mkdir -p ./dist && tweego -o ./dist/index.html ./src` then
-open the `index.html` file to view your changes.
+Before using the provided `build.yaml` file, make sure your GitHub Actions are configured with the appropriate permissions:
+
+1. Navigate to your repository on GitHub.
+2. Go to `Settings` > `Actions` > `General`.
+3. Under **Workflow permissions**, make sure the following are set:
+   - Turn on 'Allow GitHub Actions to create and approve pull requests'.
+   - Select the 'Read and write permissions' option.
+
+### Step 2: Set Repository Variables
+
+Set up the necessary repository variables for your GitHub Actions workflow:
+
+1. Go to your repository's `Settings` > `Secrets and variables` > `Actions`.
+2. Create the following repository variables:
+   - `OUTPUT_DIRECTORY`: Set this to `dist` (or your preferred output directory for the compiled game).
+   - `OUTPUT_FILENAME`: Set this to `index.html` (or your preferred name for the compiled game file).
+
+### Step 3: Add a GitHub Personal Access Token
+
+Create a GitHub Personal Access Token (PAT) to allow your workflow to authenticate with the GitHub API:
+
+1. Visit [GitHub Personal Access Tokens](https://github.com/settings/tokens) page and log in to your account.
+2. Click `Generate new token`.
+3. Provide a descriptive name for your token.
+4. Under scopes, select `public_repo` if your repository is public. Adjust scopes as needed for private repositories.
+5. Click `Generate token`.
+6. Copy the generated token.
+
+### Step 4: Add the Personal Access Token to Your Repository Secrets
+
+Add your GitHub Personal Access Token to your repository secrets:
+
+1. Go to your repository's `Settings` > `Secrets and variables` > `Actions`.
+2. Click `New repository secret`.
+3. Name the secret `PERSONAL_TOKEN` and paste your PAT into the value field.
+4. Click `Add secret`.
+
+### Step 5: Customize the `build.yaml` File
+
+Adjust the `build.yaml` file as needed. Set the `cname` field to your custom domain if applicable, or remove the line if not using a custom domain.
+
+## Using the Workflow
+
+Once set up, any push to the `main` branch will trigger the build and deployment of your project. Your game will be built using the latest version of Tweego and published to GitHub Pages.
+
+## Further Assistance
+
+If you encounter any issues or need further assistance, please refer to the [GitHub Actions documentation](https://docs.github.com/en/actions) or raise an issue in this repository.
+
