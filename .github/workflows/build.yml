@@ -19,30 +19,30 @@ jobs:
       # Fetch the latest release of Tweego
       - name: Fetch Latest Tweego Release
         run: |
-          # Use the GitHub API to fetch the latest release data for Tweego
+          #### Use the GitHub API to fetch the latest release data for Tweego
           LATEST_RELEASE=$(curl -s -H "Authorization: token ${{ secrets.API_TOKEN }}" https://api.github.com/repos/tmedwards/tweego/releases/latest)
-          # Parse the tag name and asset URL from the release data
+          #### Parse the tag name and asset URL from the release data
           LATEST_TAG=$(echo $LATEST_RELEASE | jq -r .tag_name)
           ASSET_URL=$(echo $LATEST_RELEASE | jq -r '.assets[] | select(.name | contains("linux-x64.zip")) | .browser_download_url')
-          # Download the Tweego binary zip file from the asset URL
+          #### Download the Tweego binary zip file from the asset URL
           echo "Downloading Tweego $LATEST_TAG"
           curl -L -o tweego.zip $ASSET_URL
-          # Set the TWEEGO_PATH environment variable for use in subsequent steps
+          #### Set the TWEEGO_PATH environment variable for use in subsequent steps
           echo "TWEEGO_PATH=$(pwd)/tweego" >> $GITHUB_ENV
 
       # Prepare the environment for the build
       - name: Prepare Environment
         run: |
-          # Unzip the Tweego binary and ensure it is executable
+          #### Unzip the Tweego binary and ensure it is executable
           unzip tweego.zip -d tweego
           chmod +x tweego/tweego
-          # Ensure the output directory exists
+          #### Ensure the output directory exists
           mkdir -p ${{vars.OUTPUT_DIRECTORY}} && touch ${{vars.OUTPUT_DIRECTORY}}/${{vars.OUTPUT_FILENAME}}
 
       # Build the game using Tweego
       - name: Build Game
         run: |
-          # Add Tweego to PATH and run the Tweego command to compile the game
+          #### Add Tweego to PATH and run the Tweego command to compile the game
           tweego/tweego -o ${{vars.OUTPUT_DIRECTORY}}/${{vars.OUTPUT_FILENAME}} src
 
       # Deploy the game to GitHub Pages
@@ -53,4 +53,4 @@ jobs:
           publish_branch: pages # The branch to which the compiled game will be pushed
           publish_dir: ./${{vars.OUTPUT_DIRECTORY}}/ # The directory where the compiled game is located
           enable_jekyll: true # Bypass Jekyll with an empty file
-          cname: www.twinepractice.elleynn.com # Configure CNAME record for custome domain
+          cname: www.twinepractice.elleynn.com # Configure CNAME record for custom domain
