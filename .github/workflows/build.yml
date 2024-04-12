@@ -34,12 +34,12 @@ jobs:
       - name: Build Game
         run: |
           export PATH=$PATH:$TWEEGO_PATH
-          mkdir -p $OUTPUT_DIRECTORY && touch $OUTPUT_DIRECTORY/$OUTPUT_FILENAME
-          tweego/tweego ./src -o $OUTPUT_DIRECTORY/$OUTPUT_FILENAME
+          mkdir -p ${{vars.OUTPUT_DIRECTORY}} && touch ${{vars.OUTPUT_DIRECTORY}}/${{vars.OUTPUT_FILENAME}}
+          tweego/tweego ./src -o ${{vars.OUTPUT_DIRECTORY}}/${{vars.OUTPUT_FILENAME}}
 
       - name: Deploy to Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.API_TOKEN }}
           publish_branch: pages
-          publish_dir: ./$OUTPUT_DIRECTORY
+          publish_dir: ./${{vars.OUTPUT_DIRECTORY}}/
