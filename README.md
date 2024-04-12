@@ -1,5 +1,7 @@
 ## Tweego / VS Code / GitHub Actions Practice Repository
 
+See the compiled result of this repository at [www.TwinePractice.ElleYnn.com](https://www.twinepractice.elleynn.com/).
+
 This repo demonstrates compiling multiple Twine files in the `src` directory of the `main` branch and deploying the HTML file to a custom domain (or a GitHub Page) via a GitHub Actions workflow.
 
 Using GitHub Actions for compiling Twine games offers several benefits: it ensures a consistent and clean build environment, automates the compilation process for efficiency, facilitates seamless collaboration by handling merging and build processes, keeps the repository tidy by excluding compiled files, enables immediate detection of integration issues, and allows for secure handling of sensitive information through secrets. This automated workflow is scalable, supports continuous integration and delivery, and is adaptable to the growing complexity of game development.
