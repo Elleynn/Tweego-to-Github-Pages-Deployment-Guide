@@ -4,8 +4,6 @@ See the compiled result of this repository at [www.TwinePractice.ElleYnn.com](ht
 
 This repo demonstrates compiling multiple Twine files in the `src` directory of the `main` branch and deploying the HTML file to a custom domain (or a GitHub Page) via a GitHub Actions workflow.
 
-Using GitHub Actions for compiling Twine games offers several benefits: it ensures a consistent and clean build environment, automates the compilation process for efficiency, facilitates seamless collaboration by handling merging and build processes, keeps the repository tidy by excluding compiled files, enables immediate detection of integration issues, and allows for secure handling of sensitive information through secrets. This automated workflow is scalable, supports continuous integration and delivery, and is adaptable to the growing complexity of game development.
-
 A large part of this project takes inspiration from Em Lazer-Walker's ['A Modern Developer's Workflow For Twine'](https://dev.to/lazerwalker/a-modern-developer-s-workflow-for-twine-4imp) and 6note's [TweeExample repository](https://github.com/6notes/tweeExample). Certain portions of these examples have depreciated since their publication, so I have created an alternative workflow that does not use the Go Environment since Tweego does not currently support Go modules. Instead, this workflow uses [jq for JSON processing](https://jqlang.github.io/jq/manual/) and the GitHub API to grab the latest precompiled version of Tweego.
 
 ## Workflow Setup
