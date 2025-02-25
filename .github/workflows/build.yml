@@ -2,44 +2,32 @@ name: Build
 
 on:
   push:
-    branches:
-      - main
+    branches: main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      # Check out the repository code
       - uses: actions/checkout@v4
 
-      # Fetch and install the latest release of Tweego
       - name: Install Latest Tweego Release
         run: |
-          # Get download URL directly from API response
           TWEEGO_URL=$(curl -s -H "Authorization: token ${{ secrets.PERSONAL_TOKEN }}" \
             https://api.github.com/repos/tmedwards/tweego/releases/latest \
             | grep -o 'https://[^"]*linux-x64\.zip')
-          # Download and setup Tweego
-          curl -L -o tweego.zip $TWEEGO_URL
-          # Set the TWEEGO_PATH environment variable for use in subsequent steps
-          echo "TWEEGO_PATH=$(pwd)/tweego" >> $GITHUB_ENV
-          # Unzip the Tweego binary and ensure it is executable
+          curl -L -o tweego.zip "$TWEEGO_URL"
           unzip tweego.zip -d tweego
           chmod +x tweego/tweego
 
-      # Build the game using Tweego
       - name: Build Game
         run: |
-          # Ensure the output directory exists
-          mkdir -p ${{ vars.OUTPUT_DIRECTORY }} && touch ${{ vars.OUTPUT_DIRECTORY }}/${{ vars.OUTPUT_FILENAME }}
-          # Add Tweego to PATH and run the Tweego command to compile the game
+          mkdir -p ${{ vars.OUTPUT_DIRECTORY }}
           tweego/tweego -o ${{ vars.OUTPUT_DIRECTORY }}/${{ vars.OUTPUT_FILENAME }} src
 
-      # Deploy the game to GitHub Pages
       - name: Deploy to Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.PERSONAL_TOKEN }}
-          publish_branch: pages # The branch to which the compiled game will be pushed
-          publish_dir: ./${{ vars.OUTPUT_DIRECTORY }}/ # The directory where the compiled game is located
-          cname: www.twinepractice.elleynn.com # Configure CNAME record for custom domain
+          publish_branch: pages
+          publish_dir: ./${{ vars.OUTPUT_DIRECTORY }}
+          cname: www.twinepractice.elleynn.com
