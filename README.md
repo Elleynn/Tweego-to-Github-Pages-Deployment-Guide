@@ -69,7 +69,7 @@ Add your GitHub Personal Access Token to your repository secrets:
 3. Name the secret `PERSONAL_TOKEN` and paste your PAT into the value field.
 4. Click `Add secret`.
 
-### Step 5: Customize the `build.yaml` File
+### Step 5: Customize the `build.yml` File
 
 Adjust the `build.yml` file as needed. Set the `cname` field to your custom domain if applicable, or remove the line if not using a custom domain.
 
