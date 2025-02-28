@@ -22,7 +22,7 @@ So what's the difference? When I created this repository, I noticed Tweego had c
 
 ## What Does This Repository Do?
 
-This repository is meant to serve as an example on how to set up GitHub Actions (`build.yaml` in the `.github/workflows` directory) in order to compile multiple Twee files (found in the `src` directory of the `main` branch) and deploy the resulting HTML file to a custom domain (or a GitHub Page). I highly recommend utilizing this repository in conjunction with the [guide I mentioned previously](https://dev.to/lazerwalker/a-modern-developer-s-workflow-for-twine-4imp) if you do not already have Go and Tweego installed.
+This repository is meant to serve as an example on how to set up GitHub Actions (`build.yml` in the `.github/workflows` directory) in order to compile multiple Twee files (found in the `src` directory of the `main` branch) and deploy the resulting HTML file to a custom domain (or a GitHub Page). I highly recommend utilizing this repository in conjunction with the [guide I mentioned previously](https://dev.to/lazerwalker/a-modern-developer-s-workflow-for-twine-4imp) if you do not already have Go and Tweego installed.
 
 You can see the compiled result of this repository at [www.TwinePractice.ElleYnn.com](https://www.twinepractice.elleynn.com/).
 
@@ -30,7 +30,7 @@ You can see the compiled result of this repository at [www.TwinePractice.ElleYnn
 
 ### Step 1: Configure Workflow Permissions
 
-Before using the provided `build.yaml` file, make sure your GitHub Actions are configured with the appropriate permissions:
+Before using the provided `build.yml` file, make sure your GitHub Actions are configured with the appropriate permissions:
 
 1. Navigate to your repository on GitHub.
 2. Go to `Settings` > `Actions` > `General`.
@@ -71,7 +71,7 @@ Add your GitHub Personal Access Token to your repository secrets:
 
 ### Step 5: Customize the `build.yaml` File
 
-Adjust the `build.yaml` file as needed. Set the `cname` field to your custom domain if applicable, or remove the line if not using a custom domain.
+Adjust the `build.yml` file as needed. Set the `cname` field to your custom domain if applicable, or remove the line if not using a custom domain.
 
 ## Using the Workflow
 
